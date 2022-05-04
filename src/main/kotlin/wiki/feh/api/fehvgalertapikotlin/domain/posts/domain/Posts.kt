@@ -1,6 +1,6 @@
 package wiki.feh.api.fehvgalertapikotlin.domain.posts.domain
 
-import wiki.feh.api.fehvgalertapikotlin.domain.BaseTimeEntity
+import wiki.feh.api.fehvgalertapikotlin.domain.global.model.BaseTimeEntity
 import javax.persistence.*
 
 @Entity

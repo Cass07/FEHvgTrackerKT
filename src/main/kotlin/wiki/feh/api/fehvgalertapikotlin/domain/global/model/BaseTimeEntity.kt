@@ -1,4 +1,4 @@
-package wiki.feh.api.fehvgalertapikotlin.domain
+package wiki.feh.api.fehvgalertapikotlin.domain.global.model
 
 import org.springframework.data.annotation.CreatedDate
 import org.springframework.data.annotation.LastModifiedDate

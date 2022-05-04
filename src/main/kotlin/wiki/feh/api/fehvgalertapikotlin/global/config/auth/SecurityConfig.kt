@@ -8,7 +8,9 @@ import org.springframework.security.config.http.SessionCreationPolicy
 import wiki.feh.api.fehvgalertapikotlin.domain.user.domain.Role
 
 @EnableWebSecurity
-class SecurityConfig() : WebSecurityConfigurerAdapter() {
+class SecurityConfig(
+    val customOAuth2UserService: CustomOAuth2UserService
+) : WebSecurityConfigurerAdapter() {
 
     override fun configure(http: HttpSecurity) {
         http.csrf().disable().headers().frameOptions().disable().and()
@@ -18,8 +20,8 @@ class SecurityConfig() : WebSecurityConfigurerAdapter() {
             .antMatchers(HttpMethod.GET, "/api/v1/vginfo/**", "/api/v1/vgdata/**").permitAll()
             .antMatchers(HttpMethod.PUT, "/api/v1/vginfo/**").hasRole(Role.USER.name)
             .antMatchers(HttpMethod.POST, "/api/v1/vginfo/**").hasRole(Role.USER.name)
-            .antMatchers("/admin/manualcron", "/api/v1/posts/**", "/admin/board/posts/update/**", "/admin/board/posts/save/**").permitAll()//.hasRole(Role.USER.name)
-            .antMatchers("/vg/**", "/hello").permitAll()
+            .antMatchers("/admin/manualcron", "/api/v1/posts/**", "/admin/board/posts/update/**", "/admin/board/posts/save/**").hasRole(Role.USER.name)
+            .antMatchers("/vg/**").permitAll()
             .anyRequest().authenticated()
             .and()
             .sessionManagement()
@@ -27,5 +29,9 @@ class SecurityConfig() : WebSecurityConfigurerAdapter() {
             .and()
             .logout()
             .logoutSuccessUrl("/admin/board/")
+            .and()
+            .oauth2Login()
+            .userInfoEndpoint()
+            .userService(customOAuth2UserService)
     }
 }
