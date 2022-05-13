@@ -12,7 +12,6 @@ class PostsController(
 
     @PostMapping("/api/v1/posts")
     fun save(@RequestBody requestDto: PostsSaveRequestDto): Long {
-        println("test")
         return postsService.save(requestDto)
     }
 

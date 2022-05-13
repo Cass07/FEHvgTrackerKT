@@ -67,7 +67,6 @@ class indexController(
 
         model.addAttribute("header_title", "글 내용 보기")
         model.addAttribute("customUri", custUri)
-        println(postsGetWithPicDto?.createDate)
 
         if (postsGetWithPicDto != null) {
             model.addAttribute("posts", postsGetWithPicDto)
@@ -231,18 +230,5 @@ class indexController(
     fun vgCronManual() : String{
         vgDataGetCron.GetVgData()
         return "redirect:/admin/board/"
-    }
-
-    //test
-
-    @GetMapping("/hello")
-    fun getpost(): List<PostsListResponseDto> {
-        println(securityUtil.getLoginUser()?.name)
-        return postsService.findAllDecs()
-    }
-
-    @GetMapping("/hello2")
-    fun getpost2(): String {
-        return "index"
     }
 }
